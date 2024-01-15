@@ -1,0 +1,10 @@
+body{
+    background-color: white;
+}
+
+.form{
+
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+}
