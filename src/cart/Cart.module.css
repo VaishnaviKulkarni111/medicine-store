@@ -1,0 +1,48 @@
+.li{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.closeBtn {
+    font: inherit;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid #287812;
+    padding: 0.5rem 2rem;
+    border-radius: 25px;
+    margin-left: 1rem;
+  }
+  .orderBtn {
+    font: inherit;
+    cursor: pointer;
+    background-color: #287812;
+    color: white;
+    padding: 0.5rem 2rem;
+    border-radius: 25px;
+    margin-left: 1rem;
+    border: black;
+  }
+  .removeBtn{
+    
+    cursor: pointer;
+    background-color: #8a2b06;
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    margin-left: 5rem;
+    border: none;
+  }
+  
+.actions{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.total{
+ margin: 2rem;
+ font-size: larger;
+ font-style: italic;
+ font-weight: bolder;
+ display: flex;
+ justify-content: space-around;
+}

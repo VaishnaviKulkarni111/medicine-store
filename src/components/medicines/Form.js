@@ -1,29 +1,40 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState , useContext} from 'react';
 import classes from './form.module.css';
+import MedicineContext from '../../store/medicine-context';
 
-const Form = (props) => {
-    const [name, setName] = useState();
-    const [description, setDescription] = useState();
-    const [price, setPrice] = useState();
-    const [medicine, setMedicine] = useState(); 
+const Form = () => {
+    const Medctx = useContext(MedicineContext);
+
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('');
+   
    
     const submitHandler = (event) => {
+        if(name.trim().length <1 || description.trim().length <1 || price.trim().length < 1){
+         alert('Please Enter Valid Details');
+        return;
+        }
         event.preventDefault();
-        const medicine ={
+        const newMedicine ={
             name : name,
             description: description,
             price: price, 
+            id: Math.random().toString(),
         }
+      
 
-        setMedicine((prevMedicines) => [...prevMedicines, medicine]);
-        console.log('submitted')
+        Medctx.addMedicine(newMedicine);
+        setName('');
+        setDescription('');
+        setPrice('');
     }
 
     return (
         <Fragment >
             <form onSubmit={submitHandler} className={classes.form}>      
         <div className={classes.name}>
-        <label htmlFor="name"> Name: </label>
+        <label htmlFor="name">Medicine Name: </label>
             <input type="text" value={name} onChange={e => setName(e.target.value)}/>
         </div>
         <div className={classes.desc}>
@@ -34,7 +45,7 @@ const Form = (props) => {
         <label htmlFor="price"> Price: </label>
         <input type="number"value={price} onChange={e => setPrice(e.target.value)} />
         </div>
-        <button className={classes.btn} type="submit">Add to Bill</button>
+        <button className={classes.btn} type="submit">Add Product</button>
         
         </form> 
 

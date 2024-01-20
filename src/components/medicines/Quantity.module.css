@@ -1,0 +1,23 @@
+.form{
+  display: flex;
+  justify-content:flex-end;
+}
+
+
+.addBtn{
+    background: white;
+    border: none;
+    border-radius: 8px;
+    color: #287812;
+    font-family: Phantomsans, sans-serif;
+    font-weight: bolder;
+    padding: 0.6rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 1rem;
+  }
+  .addBtn:hover{
+    background: orangered;
+    color: white;
+  }
+  

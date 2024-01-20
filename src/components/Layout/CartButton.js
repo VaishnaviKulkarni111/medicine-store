@@ -1,14 +1,26 @@
 import classes from './CartButton.module.css';
 import greenCart from '../../assets/greenCart.png';
+import CartContext from '../../store/cart-context';
+import { useContext } from 'react';
 
 const CartButton = (props) => {
+    const cartCtx = useContext(CartContext);
+    let quantity=0;
+    cartCtx.items.forEach(item=>{
+        quantity=quantity+ Number(item.quantity)
+
+    });
+
+    quantity = isNaN(quantity) ? 0 : quantity;
+
+
     return(
-        ( <button className={classes.button} onClick={props.onClickk}>
-            {/* <span className={classes.icon}>
+        ( <button className={classes.button} onClick={props.onShowCart}>
+            
             <img src={greenCart}  alt='green cart logo' /> 
-            </span> */}
+            
             <span> Your Cart</span>
-            <span className={classes.badge}>{2}</span>
+            <span className={classes.badge}>{quantity}</span>
             </button> )
     )
 };
