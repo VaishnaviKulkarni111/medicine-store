@@ -6,14 +6,13 @@ const CartProvider =(props) =>{
 
     const addItemHandler=(item)=>{
         let repeatItem = items.find((newItem) => newItem.name === item.name);
-
+       
         if (repeatItem === undefined) {
           updateItems([...items, { ...item, quantity: Number(item.quantity) }]);
         } else {
           repeatItem.quantity += Number(item.quantity);
            updateItems([...items]);
         }
-   // updateItems( (previtems) => [...previtems, item]);
     }
 
     const removeItemHandler=(item)=>{
@@ -22,26 +21,26 @@ const CartProvider =(props) =>{
         const ExistingItemIndex = updatedItems.findIndex(
           (newItem) => newItem.name === item.name
         );
-    
         if (ExistingItemIndex !== -1) {
           if (updatedItems[ExistingItemIndex].quantity > 1) {
             updatedItems[ExistingItemIndex].quantity -= 1;
           } 
           else {
-            updatedItems.splice(ExistingItemIndex, 1);
+            updatedItems.splice(ExistingItemIndex,1);
           }
-    
           updateItems(updatedItems);
         }
-       
-     
+    }
+
+    const resetCartHandler = () => {
+      updateItems([]);
     }
 
     const ListContext={
         items:items,
         addItem:addItemHandler,
-        removeItem:removeItemHandler
-
+        removeItem:removeItemHandler, 
+        resetCart: resetCartHandler,
     }
 
     return(

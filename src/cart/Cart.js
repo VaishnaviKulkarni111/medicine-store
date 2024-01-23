@@ -8,8 +8,11 @@ const Cart = (props) => {
 
   const itemRemoveHandler = (item) => {
     cartCtx.removeItem(item);
-  };
-
+  }; 
+  const orderBtnHandler =() =>{
+    cartCtx.resetCart();
+  }
+ 
   const cartItems = (
     <ul >
       {cartCtx.items.map((item) => (
@@ -43,7 +46,7 @@ const Cart = (props) => {
         <button className={classes.closeBtn} onClick={props.onClose}>
           Close
         </button>
-        <button className={classes.orderBtn} >Order</button>
+        <button className={classes.orderBtn} onClick={orderBtnHandler}>Order</button>
       </div>
     </Modal>
     )

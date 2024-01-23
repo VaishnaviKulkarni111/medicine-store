@@ -4,7 +4,7 @@ import Card from '../UI/Card'
 import classes from'./MedicineList.module.css';
 import QuantityForm from "./QuantityForm";
 
-const MedicineList = (props) => {
+const MedicineList = () => {
   
   const Ctx = useContext(MedicineContext)
   

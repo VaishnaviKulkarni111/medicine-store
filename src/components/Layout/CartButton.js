@@ -11,8 +11,7 @@ const CartButton = (props) => {
 
     });
 
-    quantity = isNaN(quantity) ? 0 : quantity;
-
+  
 
     return(
         ( <button className={classes.button} onClick={props.onShowCart}>
