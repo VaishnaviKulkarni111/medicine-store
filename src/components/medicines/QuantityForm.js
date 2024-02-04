@@ -14,9 +14,9 @@ const QuantityForm = (props) => {
 
   const addItemHandler = (event) => {
     event.preventDefault();
-    if ( quantity > 0) {
+    if (!isNaN(quantity) && quantity > 0) {
       cartCtx.addItem({ ...props.item, quantity: quantity });
-     
+      console.log('props item', props.item)
     }
   };
 

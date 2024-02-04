@@ -20,7 +20,6 @@ const Form = () => {
             name : name,
             description: description,
             price: price, 
-            id: Math.random().toString(),
         }
       
 

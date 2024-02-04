@@ -3,75 +3,78 @@ import CartContext from './cart-context';
 import axios from 'axios';
 
 const CartProvider =(props) =>{
-  const url = "https://crudcrud.com/api/ee4f9ce5c51d4852a29ac2d1a629a28f/cart"
-    const [items,updateItems] =useState([]);
+  const  [items, setItems] = useState([]);
+  const url = "https://crudcrud.com/api/191a987ce4a84f1a91a278421f407f0c/cart"
+   
 
-    const addItemHandler= async(item) =>{
+    const addItemHandler = async (item) => {
       try{  
         let repeatItem = items.find((newItem) => newItem.title === item.title);
 
-        if (repeatItem === undefined) {
-          const response = await axios.post(url, {
-            ...item, quantity: Number(item.quantity),
+        if (!repeatItem) {
+          const response = await axios.post(url, { ...item, quantity: Number(item.quantity)
            });
-          updateItems([...items, response.data]);
+          
+          setItems([...items, response.data]);
         } else {
           repeatItem.quantity += Number(item.quantity);
           await axios.put(`${url}/${repeatItem._id}`, {
             quantity: repeatItem.quantity,
           });
-          updateItems([...items]);
+          setItems([...items]);
         }
   }catch(err){
        console.log(err)
      }    
+    };
+
+    const removeItemHandler = async (item) => {
+        const updatedItems = [...items];
+try{
+  const foundItemIndex = updatedItems.findIndex(
+    (newItem) => newItem.title === item.title
+  );
+
+  if (foundItemIndex !== -1) {
+    if (updatedItems[foundItemIndex].quantity > 1) {
+      updatedItems[foundItemIndex].quantity -= 1;
+      await axios.put(
+        `${url}/${updatedItems[foundItemIndex]._id}`,
+        {
+          quantity: updatedItems[foundItemIndex].quantity,
+        }
+      );
+      setItems(updatedItems);
+    } 
+    else  {
+      await axios.delete(
+        `${url}/${updatedItems[foundItemIndex]._id}`
+      );
+      updatedItems.splice(foundItemIndex, 1);
+      setItems(updatedItems);
     }
+  }
+  }catch(err){
+  console.log(err)
+  }       
+    };
 
-    const removeItemHandler=async (item)=>{
-      const updatedItems = [...items];
-    // try{
-    //   const ExistingItemIndex = updatedItems.findIndex(
-    //     (newItem) => newItem.name === item.name
-    //   );
-    //   if (ExistingItemIndex !== -1) {
-    //     if (updatedItems[ExistingItemIndex].quantity > 1) {
-    //       updatedItems[ExistingItemIndex].quantity -= 1;
-    //       await axios.put(
-    //         `${url}/${updatedItems[ExistingItemIndex]._id}`,
-    //         {
-    //           quantity: updatedItems[ExistingItemIndex].quantity,
-    //         });
-    //         updateItems(updatedItems);
-    //     } 
-    //     else {
-    //       await axios.delete(
-    //         `${url}/${updatedItems[ExistingItemIndex]._id}`
-    //       );
-    //       updatedItems.splice(ExistingItemIndex,1);
-    //     }
-    //     updateItems(updatedItems);
-    //   }
-
-    // }catch(err){
-    //  console.log(err)
-    // }     
-    }
-
-    const resetCartHandler = () => {
-      updateItems([]);
-    }
-
+  
     const getItem = async () => {
       try {
         const response = await axios.get(url);
-         updateItems( response.data);
+         setItems( response.data);
       } catch (error) {
-        console.log("error fetching cart cart items", error);
+        console.log( error);
       }
     };
+
     useEffect(() => {
       getItem();
     }, []);
+    function resetCartHandler(){
+      setItems([])
+    }
 
     const ListContext={
         items:items,
