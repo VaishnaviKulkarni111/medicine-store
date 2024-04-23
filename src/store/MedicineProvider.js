@@ -3,7 +3,7 @@ import MedicineContext from './medicine-context';
 import axios from 'axios';
 
 const MedicineProvider = (props) => {
-  const url = "https://crudcrud.com/api/191a987ce4a84f1a91a278421f407f0c/medicines"
+  const url = "https://crudcrud.com/api/ebd1670a5cf047c9a846e7404a8de6c8/medicines"
     const [medicines, setMedicines] = useState([]);
     const addMedicine = async (newMedicine) => {
     try{
