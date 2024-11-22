@@ -3,7 +3,7 @@ import CartContext from './cart-context';
 import axios from 'axios';
 
 const CartProvider =(props) =>{
-  const url = "https://crudcrud.com/api/ebd1670a5cf047c9a846e7404a8de6c8/cart"
+  const url = "https://crudcrud.com/api/4e78268dbacd45829f7749eb924845f5/cart"
   const  [items, updateItems] = useState([]);
   console.log('items' ,items)
   const addItemHandler = async (item) => {
